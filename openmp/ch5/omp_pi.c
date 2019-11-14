@@ -40,7 +40,10 @@ int main(int argc, char* argv[]) {
 #  pragma omp parallel for num_threads(thread_count) \
       reduction(+: sum) private(factor)
    for (i = 0; i < n; i++) {
-      factor = (i % 2 == 0) ? 1.0 : -1.0; 
+      factor = (i % 2 == 0) * 2 - 1; 
+      //factor = (i % 2 == 0) ? 1.0 : -1.0; 
+	//	printf("%lld - %d\n",i, (i%2==0) * 2 -1);
+      //sum += (((i%2==0)*(2)) - 1)/(2*i+1);
       sum += factor/(2*i+1);
 #     ifdef DEBUG
       printf("Thread %d > i = %lld, my_sum = %f\n", my_rank, i, my_sum);
